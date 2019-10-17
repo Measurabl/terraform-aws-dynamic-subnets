@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "nat_instance_ingress" {
 
 // aws --region us-west-2 ec2 describe-images --owners amazon --filters Name="name",Values="amzn-ami-vpc-nat*" Name="virtualization-type",Values="hvm"
 data "aws_ami" "nat_instance" {
-  count       = var.nat_instance_enabled ? 1 : 0
+  count       = var.nat_instance_enabled && var.enabled ? 1 : 0
   most_recent = true
 
   filter {

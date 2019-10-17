@@ -75,7 +75,7 @@ resource "aws_route_table_association" "private" {
 }
 
 resource "aws_network_acl" "private" {
-  count      = signum(length(var.private_network_acl_id)) == 0 ? 1 : 0
+  count      = var.enabled ? (signum(length(var.private_network_acl_id)) == 0 ? 1 : 0) : 0
   vpc_id     = var.vpc_id
   subnet_ids = aws_subnet.private.*.id
 
