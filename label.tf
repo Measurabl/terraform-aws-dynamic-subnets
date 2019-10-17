@@ -6,6 +6,7 @@ module "label" {
   stage               = var.stage
   delimiter           = var.delimiter
   name                = var.name
+  enabled             = var.enabled
   tags                = var.tags
   additional_tag_map  = var.additional_tag_map
   regex_replace_chars = var.regex_replace_chars
@@ -53,6 +54,12 @@ variable "name" {
   type        = string
   default     = ""
   description = "Solution name, e.g. 'app' or 'jenkins'"
+}
+
+variable "enabled" {
+  type        = bool
+  description = "Set to false to prevent the module from creating any resources"
+  default     = true
 }
 
 variable "environment" {

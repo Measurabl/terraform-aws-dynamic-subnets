@@ -14,7 +14,7 @@ locals {
 }
 
 resource "aws_subnet" "private" {
-  count             = length(var.availability_zones)
+  count             = var.enabled ? length(var.availability_zones) : 0
   vpc_id            = data.aws_vpc.default.id
   availability_zone = element(var.availability_zones, count.index)
 
@@ -47,7 +47,7 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_route_table" "private" {
-  count  = length(var.availability_zones)
+  count  = var.enabled ? length(var.availability_zones) : 0
   vpc_id = data.aws_vpc.default.id
 
   tags = merge(
